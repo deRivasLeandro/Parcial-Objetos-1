@@ -1,0 +1,61 @@
+import semillas.*
+import parcelas.*
+import inta.*
+
+describe "tests" {
+	const menta1 = new Menta(altura = 1, anioDeObtencion = 2005)
+	const menta2 = new Menta(altura = 0.3, anioDeObtencion = 2005)
+	const soja1 = new Soja(altura = 0.6, anioDeObtencion = 2009)
+	const quinoa1 = new Quinoa(altura = 1, horasToleranciaAlSol = 12, anioDeObtencion = 2010)
+	const quinoa2 = new Quinoa(altura = 1, horasToleranciaAlSol = 9, anioDeObtencion = 2001)
+	const parcela1 = new Ecologica(ancho = 20, largo = 1, horasDeSolPorDia = 8)
+	const soja2 = new Soja(altura = 2, anioDeObtencion = 2005)
+	const soja3 = new Soja(altura = 2, anioDeObtencion = 2005)
+	const soja4 = new Soja(altura = 2, anioDeObtencion = 2005)
+	const soja5 = new Soja(altura = 2, anioDeObtencion = 2005)
+	const soja6 = new Soja(altura = 2, anioDeObtencion = 2005)
+	const soja7 = new Soja(altura = 2, anioDeObtencion = 2005)
+	const parcela2 = new Ecologica(ancho = 100, largo = 50, horasDeSolPorDia = 5)
+	method initialize() {
+		parcela1.agregarPlanta(soja2)
+		parcela1.agregarPlanta(soja3)
+		parcela1.agregarPlanta(soja4)
+		parcela1.agregarPlanta(soja5)
+	}
+
+	test "menta" {
+		assert.that(menta1.daSemillas())
+		assert.equals(menta1.espacio(), 3)
+		assert.notThat(menta2.daSemillas())
+		assert.equals(menta2.espacio(), 0.9)
+	}
+	
+	test "soja" {
+		assert.equals(soja1.horasToleranciaAlSol(), 7)
+		assert.notThat(soja1.daSemillas())
+		assert.equals(soja1.espacio(), 0.3)
+	}
+	
+	test "quinoa" {
+		assert.that(quinoa1.daSemillas())
+		assert.that(quinoa2.daSemillas())
+	}
+	
+	test "parcela" {
+		assert.equals(parcela1.cantidadMaximaDePlantas(), 4)
+		assert.notThat(parcela1.tieneComplicaciones())
+	}
+
+	test "inta" {
+		parcela2.agregarPlanta(soja7)
+		parcela2.agregarPlanta(soja6)
+		parcela2.agregarPlanta(soja5)
+		parcela2.agregarPlanta(soja4)
+		parcela2.agregarPlanta(soja3)
+		inta.agregarParcela(parcela1)
+		inta.agregarParcela(parcela2)
+		assert.equals(inta.promedioDePlantas(), 4.5)
+		assert.equals(inta.masAutosustentable(), parcela2)
+	}
+}
+
