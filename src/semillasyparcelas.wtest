@@ -16,6 +16,8 @@ describe "tests" {
 	const soja6 = new Soja(altura = 2, anioDeObtencion = 2005)
 	const soja7 = new Soja(altura = 2, anioDeObtencion = 2005)
 	const parcela2 = new Ecologica(ancho = 100, largo = 50, horasDeSolPorDia = 5)
+	
+	
 	method initialize() {
 		parcela1.agregarPlanta(soja2)
 		parcela1.agregarPlanta(soja3)
